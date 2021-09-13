@@ -1,0 +1,107 @@
+{% load static %}
+<!doctype html>
+
+<!-- https://www.figma.com/team_invite/redeem/WQ0qZt4vnJagG7wOJ2rM9G -->
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="google-signin-scope" content="profile email">
+  <meta name="google-signin-client_id" content="138370122056-fpevjpa2bgg0vkptfedcr1ojpdnhmsh3.apps.googleusercontent.com">
+  <script src="https://apis.google.com/js/platform.js" async defer></script>
+  <script src="{% static 'frontend/js/script.js' %}"></script>
+
+  <title>Stressed Strawberries</title>
+  <meta name="description" content="We Are Stressed Strawberries">
+  <meta name="author" content="Lord, Savior, and Harem leader Maxwell">
+
+
+  <link rel="stylesheet" href="{% static 'frontend/css/style.css' %}">
+  <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+  
+
+</head>
+
+<body id="body"> 
+
+    
+  <!--https://developers.google.com/identity/sign-in/web/sign-in-->
+  <!--https://medium.com/@thomashellstrom/use-google-as-login-in-your-web-app-with-oauth2-352f6c7f10e6-->
+
+  {% include 'frontend/navbar.html' %}
+
+	<div id="main">
+		<button class="openbtn" onclick="openNav()">&#9776; </button> 
+    
+
+
+    <!-- <center>
+    <a href="https://stressedstrawberries.maxwellzen.repl.co/index.html" target="_blank">This is a link</a>
+    </center> -->
+
+    <!-- <div id="textContainer">
+        <p> 
+        <span class = "outline"> mapmunchies</span>
+        </p>
+    </div> -->
+
+    <center>
+    <a href="https://stressedstrawberries.maxwellzen.repl.co/index.py">
+    <img src="{{MEDIA_URL}}/images/logo.png" alt="Italian Trulli" style="width:669px;height:111px;">
+    </a>
+    </center>
+
+    
+    <iframe src="https://snazzymaps.com/embed/292648" width="100%" height="600px" style="border:none;"></iframe>
+
+ 
+  <div>
+    <div class="div" data-aos="fade-left" data-aos-duration="1000" data-aos-once="true" id="textContainer">
+              <p > 
+                <span class = "outline"> Share Your Story!</span>
+        </p>
+          </div>
+          </div>
+
+  <div>
+    <div class="a" data-aos="zoom-in" data-aos-duration="1000" data-aos-once="true" id="textContainer">
+<center>
+    <form action="/updatestories.py">
+
+    <label for="restaurant">Small Business Restaurant</label> <br>
+    <select id="restaurant" name="restaurant">
+      <!--options-->
+    </select>
+
+    <!-- <label for="fname">Message</label> <br>
+    <input type="text" id="textbox" name="firstname" placeholder="Your message.." > -->
+
+    <br><br><label for="message">Message</label> <br>
+    <textarea id="message" name="message" rows="6" cols="135"></textarea>
+    <input type='text' id='name' name='name' style = 'display: none;' value=''>
+    <input type='text' id='email' name='email' style = 'display: none;' value=''>
+    <input type='text' id='pfp' name='pfp' style = 'display: none;' value=''>
+
+    <input type="submit" value="Submit">
+    </center>
+
+  </form>
+          </div>
+          </div>
+
+ 
+
+  <br><br><br>
+
+  <center> Don't see the small business you had in mind? Go to Explore Map from the navigation bar and add it! </center>
+   <br>
+  </div> 
+  
+<script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script>
+      AOS.init({
+        duration: 3000,
+        once: true,
+      });
+    </script>
+</body>
+</html>

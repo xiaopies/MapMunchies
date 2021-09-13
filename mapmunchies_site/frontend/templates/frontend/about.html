@@ -1,0 +1,113 @@
+{% load static %}
+<html>
+  <head>
+    <link rel="stylesheet" href="{% static 'frontend/css/about.css' %}">
+    <link rel="stylesheet" href="{% static 'frontend/css/generic.css' %}">
+    <script src="{% static 'frontend/js/generic.js' %}"></script>
+    <style>
+        #textContainer p{
+            font-family: Megrim, cursive;
+            font-size: 64px;
+            font-weight: 1000;
+            color: #E6E8E6;
+            margin: 0;
+            text-align: center;
+        }
+        #textContainer .outline {
+            -webkit-text-stroke-width: 1px;
+            -webkit-text-stroke-color: #E6E8E6;
+            color: transparent;
+        } 
+      
+      </style>
+     <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+  </head>
+
+  <body> 
+
+
+    {% include 'frontend/navbar.html' %}
+
+
+    <div id="main">
+    <button class="openbtn" onclick="openNav();">&#9776;</button> 
+
+    <center>
+    <a href="https://stressedstrawberries.maxwellzen.repl.co/index.py">
+    <img src="{{MEDIA_URL}}/images/logo.png" alt="Italian Trulli" style="width:669px;height:111px;">
+    </a>
+    </center>
+
+
+    
+    <div>
+      <div class="title" id="textContainer" data-aos = "fade-left">
+        <center> <h3 > About </h3> </center>
+        </div>
+        </div>
+    <div id="main">
+   
+    <div>
+      <div class="a" id="textContainer" data-aos = "fade-right">
+
+
+        &nbsp; <h2> Info: </h2>
+      &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp The goal of MapMunchies is to help small food businesses that have been struggling due to the pandemic! People with stories to share about a personal experience or memory relating to their favorite small businesses can post them on our interactive map. Users can contact each other to meet up (most likely virtually as of now) and enjoy food together! This way people can spread their love for food and support local businesses at the same time. 
+
+      <br> 
+        
+        </div>
+        </div>
+<div class="example">
+  <center>
+  <img src = "https://images.fineartamerica.com/images/artworkimages/mediumlarge/2/the-cadillac-lounge-tim-palmer.jpg" id="aboutimg">
+  <div class = "content">
+    <div class = "text"> 
+The results suggest that the pandemic had already caused massive dislocation among small businesses just several weeks after its onset and prior to the availability of government aid through the Coronavirus Aid, Relief, and Economic Security (CARES) Act. Across the full sample, 43% of businesses had temporarily closed, and nearly all of these closures were due to COVID-19. 
+
+    </div>
+</div>
+</center>
+</div>
+
+
+    <div>
+      <div class="a" id="textContainer" data-aos = "zoom-out">
+&nbsp; <h2> How to use this website: </h2>
+      <ul>
+        <li>Download a Python Web Server if you don't already have one! Instructions linked <a href="http://bert.stuy.edu/pbrooks/pythonwebserver/"> here </a> (with thanks to our intro cs teacher Mr. Brooks!)</li>
+        <li>Download the zip file containing all the code from github </li>
+      </ul>
+
+
+        </div>
+        </div>
+
+    <div>
+      <div class="a" id="textContainer" data-aos = "flip-up">
+     &nbsp; <h2> Documentation: </h2>
+
+      <ul>
+        <li> Used HTML and CSS code from <a href="https://www.w3schools.com"> W3schools </a> as a template for some features </li>
+        <li> Used Leaflet, Open Street Maps and Map Box for the explore map </li>
+        <li> Used Google Maps for the home page map </li>
+        <li> Many thanks to Michal Sajnog, front end developer at Netguru for AOS Animation Library</li>
+        
+      </ul>
+
+        </div>
+        </div>
+
+  
+   <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script>
+      AOS.init({
+        duration: 3000,
+        once: true,
+      });
+    </script>
+  </body> 
+
+
+
+</html>

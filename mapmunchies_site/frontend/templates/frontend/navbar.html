@@ -1,0 +1,9 @@
+<div id="mySidebar" class="sidebar">
+    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+    <a href="{% url 'frontend:index' %}">Home</a>
+    <a href="{% url 'frontend:explore' %}">Explore Map</a>
+    <a href="stories.py">Stories Database</a>
+    <a href="{% url 'frontend:about' %}">About</a>
+    <a href="login.html" onclick="signOut();" id="signout">Sign out</a>
+    <div id="profileinfo"> </div>
+</div>

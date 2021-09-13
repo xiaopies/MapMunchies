@@ -1,0 +1,87 @@
+
+{% load static %}
+<DOCTYPE html>
+	<html lang="en">
+
+	<head>
+		<title>
+			Explore Map
+		</title>
+        <meta name="google-signin-scope" content="profile email">
+        <meta name="google-signin-client_id" content="138370122056-fpevjpa2bgg0vkptfedcr1ojpdnhmsh3.apps.googleusercontent.com">
+        <script src="https://apis.google.com/js/platform.js" async defer></script>
+		<link rel="stylesheet" href="{% static 'frontend/css/explore.css' %}" %}>
+		<link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+		 crossorigin="" />
+		<script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js" integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+		 crossorigin="">
+
+		</script>
+    <script src="{% static 'frontend/js/generic.js' %}"></script>
+    <link rel="stylesheet" href="{% static 'frontend/css/generic.css' %}">
+
+	</head>
+
+	<body>
+        <div class="g-signin2" id="signin" data-onsuccess="onSignIn" data-theme="dark" style="display: none"></div>
+        {% include 'frontend/navbar.html' %}
+
+        <div id="main">
+            <button class="openbtn" onclick="openNav();">&#9776;</button>
+
+
+            <center>
+            <a href="https://stressedstrawberries.maxwellzen.repl.co/index.py">
+            <img src="{{MEDIA_URL}}/images/logo.png" alt="Italian Trulli" style="width:669px;height:111px;">
+            </a>
+            <center> <br><br>
+
+
+
+            <div class = "a">Explore Map</div>
+            <p>Toggle Light/Dark Mode</p>
+
+            <label class="switch">
+                <input type="checkbox" id="darkmode" onclick="toggle()">
+                <span class="slider round"></span>
+            </label>
+            <div id="aroundmap" style="margin-top: 20px;"><div id="mapid"></div></div>
+        </div>
+        <!--script-->
+
+        <br><br>
+        <center>
+        <h4> Tell us about a new small business by adding their information and icon into out map! </h4> <br>
+
+          <form action="/ham.py">
+
+            Name of the Business: <input type='text' id='name' name='name' value=''>
+
+            <br>
+
+            <label for="address">Address: </label>
+              <select id="address" name="address">
+                <option value="Bronx, NY">Bronx</option>
+                <option value="Brooklyn, NY">Brooklyn</option>
+                <option value="Manhattan, NY">Manhattan</option>
+                <option value="Staten Island, NY">Staten Island</option>
+                <option value="Queens, NY">Queens</option>
+              </select>
+
+            <br>
+
+            X coordinate: <input type='text' id='x' name='x' value='' size="1">  <br>
+
+            Y coordinate: <input type='text' id='y' name='y' value='' size="1">  <br>
+
+            <input type="submit" value="Submit">
+
+            </form>
+
+        </center>
+
+
+    <br><br><br><br>
+	</body>
+
+</html>
