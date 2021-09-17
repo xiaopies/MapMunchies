@@ -3,6 +3,11 @@
     <a href="{% url 'frontend:index' %}">Home</a>
     <a href="{% url 'frontend:explore' %}">Explore Map</a>
     <a href="{% url 'frontend:about' %}">About</a>
-    <a href="login.html" onclick="signOut();" id="signout">Sign out</a>
+    {% if user.is_authenticated %}
+
+      <a href="{% url 'account_logout' %}" onclick="signOut();" id="signout">Sign out</a>
+    {% else %}
+      <a href="{% url 'account_login' %}" onclick="signOut();" id="signout">Login</a>
+    {% endif %}
     <div id="profileinfo"> </div>
 </div>
