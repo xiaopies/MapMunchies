@@ -1,6 +1,7 @@
 hello world
 
 <form action="" method="post" enctype="application/x-www-form-urlencoded">
-{{form}}
-<button type="submit" name="submit">submit</button>
+    {% csrf_token %}
+    {{form.as_p}}
+    <button type="submit" name="submit">submit</button>
 </form>

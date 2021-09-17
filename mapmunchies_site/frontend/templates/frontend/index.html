@@ -65,26 +65,11 @@
   <div>
     <div class="a" data-aos="zoom-in" data-aos-duration="1000" data-aos-once="true" id="textContainer">
 <center>
-    <form action="/updatestories.py">
-
-    <label for="restaurant">Small Business Restaurant</label> <br>
-    <select id="restaurant" name="restaurant">
-      <!--options-->
-    </select>
-
-    <!-- <label for="fname">Message</label> <br>
-    <input type="text" id="textbox" name="firstname" placeholder="Your message.." > -->
-
-    <br><br><label for="message">Message</label> <br>
-    <textarea id="message" name="message" rows="6" cols="135"></textarea>
-    <input type='text' id='name' name='name' style = 'display: none;' value=''>
-    <input type='text' id='email' name='email' style = 'display: none;' value=''>
-    <input type='text' id='pfp' name='pfp' style = 'display: none;' value=''>
-
-    <input type="submit" value="Submit">
-    </center>
-
-  </form>
+  <form action="" method="post" enctype="application/x-www-form-urlencoded">
+    {% csrf_token %}
+    {{form.as_p}}
+    <button type="submit" name="submit">submit</button>
+</form>
           </div>
           </div>
 

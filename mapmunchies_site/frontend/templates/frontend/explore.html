@@ -53,30 +53,11 @@
         <center>
         <h4> Tell us about a new small business by adding their information and icon into out map! </h4> <br>
 
-          <form action="/ham.py">
-
-            Name of the Business: <input type='text' id='name' name='name' value=''>
-
-            <br>
-
-            <label for="address">Address: </label>
-              <select id="address" name="address">
-                <option value="Bronx, NY">Bronx</option>
-                <option value="Brooklyn, NY">Brooklyn</option>
-                <option value="Manhattan, NY">Manhattan</option>
-                <option value="Staten Island, NY">Staten Island</option>
-                <option value="Queens, NY">Queens</option>
-              </select>
-
-            <br>
-
-            X coordinate: <input type='text' id='x' name='x' value='' size="1">  <br>
-
-            Y coordinate: <input type='text' id='y' name='y' value='' size="1">  <br>
-
-            <input type="submit" value="Submit">
-
-            </form>
+        <form action="" method="post" enctype="application/x-www-form-urlencoded">
+          {% csrf_token %}
+          {{RestaurantForm.as_p}}
+          <button type="submit">submit</button>
+          </form>
 
         </center>
 
