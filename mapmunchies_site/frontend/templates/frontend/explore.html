@@ -44,9 +44,17 @@
                 <input type="checkbox" id="darkmode" onclick="toggle()">
                 <span class="slider round"></span>
             </label>
+						<!-- map -->
             <div id="aroundmap" style="margin-top: 20px;"><div id="mapid"></div></div>
         </div>
         <!--script-->
+				<link rel="stylesheet" href="{% static 'frontend/css/map.css' %}" %}>
+				<script src="{% static 'frontend/js/map.js' %}"></script>
+				<script
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCuc7ucUyIaf7xV1WPhjRch8MMUDLdYr2w&callback=initMap&v=weekly"
+      async
+    ></script>
+
 
         <br><br>
         <center>

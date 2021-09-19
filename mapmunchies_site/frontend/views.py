@@ -4,26 +4,29 @@ from stories.forms import RestaurantForm, StoryForm
 from stories.models import restaurants
 # Create your views here.
 def index(request):
-    if request.method == "POST":
+    if request.method == "POST" and request.user.is_authenticated:
         #user submitted new restaurants form
         form = StoryForm(request.POST)
         if form.is_valid():
-            form.save()
+            ParticalStory = form.save(commit=False)
+            ParticalStory.author = request.user
+            ParticalStory.save()
         else:
             return HttpResponse(form.errors)
-    context = {'form': StoryForm()} 
+    context = {'form': StoryForm()}
     return render(request, 'frontend/index.html', context)
 
 def explore(request):
-    if request.method == "POST":
+    if request.method == "POST" and request.user.is_authenticated:
         #user submitted new restaurants form
         form = RestaurantForm(request.POST)
         if form.is_valid():
             print(form.cleaned_data['name'])
             newRestaurant = restaurants(
-                name = form.cleaned_data['name'], 
+                name = form.cleaned_data['name'],
+                author = request.user,
                 borough = form.cleaned_data['bourogh'],
-                xcor = form.cleaned_data['xcor'], 
+                xcor = form.cleaned_data['xcor'],
                 ycor = form.cleaned_data['ycor'],
                 )
             newRestaurant.save()
