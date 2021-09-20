@@ -15,4 +15,5 @@
     "position",c)};b.o=function(a){google.maps.event.trigger(this,"geolocation_error",a)};function k(a,c){for(var f in c)!0!==p[f]&&(a[f]=c[f]);return a}var p={map:!0,position:!0,radius:!0},n=/^(?:position|accuracy)$/i;var q=window;function r(){h.prototype.getAccuracy=h.prototype.j;h.prototype.getBounds=h.prototype.m;h.prototype.getMap=h.prototype.f;h.prototype.getMinimumAccuracy=h.prototype.h;h.prototype.getPosition=h.prototype.g;h.prototype.getPositionOptions=h.prototype.l;h.prototype.setCircleOptions=h.prototype.s;h.prototype.setMap=h.prototype.setMap;h.prototype.setMarkerOptions=h.prototype.u;h.prototype.setMinimumAccuracy=h.prototype.v;h.prototype.setPositionOptions=h.prototype.w;return h}
     "function"===typeof q.define&&q.define.amd?q.define([],r):"object"===typeof q.exports?q.module.exports=r():q.GeolocationMarker=r();
     }).call(this)
-    
+
+

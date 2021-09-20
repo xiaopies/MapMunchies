@@ -32,9 +32,12 @@ function initMap(location){
     });
   }
 
+  GLOBALS.GeoMarker = new GeolocationMarker(GLOBALS.map);
+
 }
 
 function getLocation(){
+  // to be used just initally to center the map on the user before geolocaton marker takes over 
   const options = {
     enableHighAccuracy: true,
     // timeout: 5000, // => default infinity // take as much time as you need
