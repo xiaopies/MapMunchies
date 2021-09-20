@@ -6,9 +6,6 @@
 		<title>
 			Explore Map
 		</title>
-        <meta name="google-signin-scope" content="profile email">
-        <meta name="google-signin-client_id" content="138370122056-fpevjpa2bgg0vkptfedcr1ojpdnhmsh3.apps.googleusercontent.com">
-        <script src="https://apis.google.com/js/platform.js" async defer></script>
 		<link rel="stylesheet" href="{% static 'frontend/css/explore.css' %}" %}>
 		<link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
 		 crossorigin="" />
@@ -50,10 +47,12 @@
         <!--script-->
 				<link rel="stylesheet" href="{% static 'frontend/css/map.css' %}" %}>
 				<script src="{% static 'frontend/js/map.js' %}"></script>
+        
 				<script
-      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCuc7ucUyIaf7xV1WPhjRch8MMUDLdYr2w&callback=initMap&v=weekly"
-      async
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCuc7ucUyIaf7xV1WPhjRch8MMUDLdYr2w&callback=start&v=weekly"
+      defer
     ></script>
+    <script src="{% static 'frontend/js/geolocation-marker.js' %}" defer></script>
 
 
         <br><br>
