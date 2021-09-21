@@ -24,7 +24,6 @@ def explore(request):
             print(form.cleaned_data['name'])
             newRestaurant = restaurants(
                 name = form.cleaned_data['name'],
-                author = request.user,
                 borough = form.cleaned_data['bourogh'],
                 xcor = form.cleaned_data['xcor'],
                 ycor = form.cleaned_data['ycor'],
