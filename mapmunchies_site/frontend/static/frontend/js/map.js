@@ -4,12 +4,12 @@ const GLOBALS = {
 }
 const CONSTANTS = {
   startingZoom : 15,
-} 
+}
 
 async function start() { //google api loaded
-  // get location 
+  // get location
   getLocation()
-}  
+}
 
 function initMap(location){
   if (location){
@@ -37,15 +37,15 @@ function initMap(location){
 }
 
 function getLocation(){
-  // to be used just initally to center the map on the user before geolocaton marker takes over 
+  // to be used just initally to center the map on the user before geolocaton marker takes over
   const options = {
     enableHighAccuracy: true,
-    // timeout: 5000, // => default infinity // take as much time as you need
+    timeout: 5000, // => default infinity // take as much time as you need
     maximumAge: 500,
   };
   if (navigator.geolocation) {
-    navigator.geolocation.getCurrentPosition(initMap, 
-      function error(msg) { 
+    navigator.geolocation.getCurrentPosition(initMap,
+      function error(msg) {
         console.log(msg);
         initMap(null);
     }, options);
