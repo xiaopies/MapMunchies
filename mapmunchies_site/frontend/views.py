@@ -16,6 +16,9 @@ def index(request):
     context = {'form': StoryForm()}
     return render(request, 'frontend/index.html', context)
 
+def nearbySearch(request):
+    pass
+
 def explore(request):
     if request.method == "POST" and request.user.is_authenticated:
         #user submitted new restaurants form
