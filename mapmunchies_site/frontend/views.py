@@ -17,7 +17,9 @@ def index(request):
     return render(request, 'frontend/index.html', context)
 
 def nearbySearch(request):
-    pass
+    if request.method == "POST":
+        print(request);
+        return HttpResponse('{"status": "good"}')
 
 def explore(request):
     if request.method == "POST" and request.user.is_authenticated:

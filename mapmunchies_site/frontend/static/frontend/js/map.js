@@ -1,11 +1,9 @@
-const GLOBALS = {
-  map:null,
-}
-const CONSTANTS = {
-  startingZoom : 15,
-  csrftoken = getCookie('csrftoken'),
-  stuy: { lat: 40.7178149, lng: -74.0138422 },
-}
+
+GLOBALS.map = null;
+CONSTANTS.startingZoom = 15;
+CONSTANTS.csrftoken = getCookie('csrftoken');
+CONSTANTS.stuy= { lat: 40.7178149, lng: -74.0138422 };
+
 
 async function start() { //google api loaded
   // get location
@@ -32,7 +30,8 @@ function initMap(location){
       zoom: CONSTANTS.startingZoom,
     });
   }
-
+  // map is inited
+  GLOBALS.service = new google.maps.places.PlacesService(GLOBALS.map);
   GLOBALS.GeoMarker = new GeolocationMarker(GLOBALS.map);
 
 
@@ -56,6 +55,7 @@ function initMap(location){
     );
     GLOBALS.infoWindow.open(GLOBALS.map);
   });
+  initNearbySearchEventListeners(); //nearbySearch.js
 }
 
 function getLocation(){
@@ -66,7 +66,8 @@ function getLocation(){
     maximumAge: 500,
   };
   if (navigator.geolocation) {
-    navigator.geolocation.getCurrentPosition(initMap,
+    navigator.geolocation.getCurrentPosition(
+      initMap,
       function error(msg) {
         console.log(msg);
         initMap(null);
@@ -76,37 +77,4 @@ function getLocation(){
     x.innerHTML = "Geolocation is not supported by this browser.";
     initMap(null);
   }
-}
-
-function nearbySearch(){
-  //do nearybySearch after 3 seconds
-  let mapbounds = GLOBALS.map.getBounds();
-  let ne = mapbounds.getNorthEast();
-  let sw = mapbounds.getSouthWest();
-  let center = GLOBALS.map.center;
-  let request = {
-    centerlat: center.lat(),
-    centerlng:center.lng(),
-    nelat:ne.lat(),
-    nelon:ne.lng(),
-    swlat:sw.lat(),
-    swlon:sw.lng(),
-  }
-  let nelat = ne.lat();
-  let nelon = ne.lng();
-  let swlat = sw.lat();
-  let swlon = sw.lng();
-  console.log("query from local db");
-  queryDB(request);
-}
-/**
- * Ask for stories in this area
- * @param {*} request 
- */
-function queryDB(request = {centerlat, centerlng, nelat, nelon, swlat, swlon}){
-  var xhr = new XMLHttpRequest();
-  xhr.open("POST", "", true);
-  xhr.setRequestHeader('Content-Type', 'application/json');
-  xhr.setRequestHeader('HTTP_X_CSRFTOKEN', CONSTANTS.csrftoken);
-  xhr.send(JSON.stringify(request));
 }

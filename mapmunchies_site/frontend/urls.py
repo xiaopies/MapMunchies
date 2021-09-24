@@ -7,5 +7,6 @@ urlpatterns = [
     path('', views.index, name="index"),
     path('explore', views.explore, name="explore"),
     path('about', views.about, name="about"),
-    path('test', views.test, name="test")
+    path('test', views.test, name="test"),
+    path('nearbySearch', views.nearbySearch, name="nearbySearch"),
 ]

@@ -1,0 +1,2 @@
+const GLOBALS = {};
+const CONSTANTS = {};
