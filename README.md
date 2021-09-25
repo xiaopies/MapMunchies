@@ -13,6 +13,7 @@ py manage.py runserver
 #Linux
 git clone this repo: https://github.com/xiaopies/MapMunchies.git c
 (optional) Create python3 virtual environment for your python dependencies
+https://virtualenv.pypa.io/en/latest/user_guide.html#introduction 
 
 
 pip install -r requirement.txt
