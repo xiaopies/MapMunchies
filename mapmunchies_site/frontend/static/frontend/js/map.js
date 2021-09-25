@@ -1,13 +1,12 @@
-
 GLOBALS.map = null;
 CONSTANTS.startingZoom = 15;
-CONSTANTS.csrftoken = getCookie('csrftoken');
 CONSTANTS.stuy= { lat: 40.7178149, lng: -74.0138422 };
 
 
 async function start() { //google api loaded
   // get location
-  getLocation()
+  getLocation();
+
 }
 
 function initMap(location){

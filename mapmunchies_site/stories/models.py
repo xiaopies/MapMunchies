@@ -2,7 +2,7 @@ from django.db import models
 from django.utils import timezone
 from django.core.validators import MinLengthValidator, MinValueValidator
 from django.contrib.auth.models import User
-
+from django.db.models.expressions import RawSQL
 
 def get_borough_list():
     list_of_bouroghs = {
@@ -13,6 +13,52 @@ def get_borough_list():
         5:'staten island',
     }
     return list_of_bouroghs
+
+
+class restaurants_Manager(models.Manager):
+    def isFloatNum(self, targetString):
+        print(targetString)
+        try: 
+            float(targetString)
+            return(True)
+        except:
+            print("Not a float")
+            return(False)
+    # request = { latitude:float, longitude:float, nelat:float, nelon:float, swlat:float, swlon:float }
+    def search(self, request):
+        x = True
+        for key, value in request:
+            if not self.isFloatNum(value):
+                x = False
+        # x = self.isFloatNum(request.latitude) and self.isFloatNum(request.longitude) 
+        # x = x and self.isFloatNum(request.nelat) and self.isFloatNum(request.nelon) and self.isFloatNum(request.swlat) and self.isFloatNum(swlon)
+        if (x): 
+            # Great circle distance formula
+            gcd_formula = "6371 * acos(min(max(\
+            cos(radians(%s)) * cos(radians(lat)) \
+            * cos(radians(lon) - radians(%s)) + \
+            sin(radians(%s)) * sin(radians(lat)) \
+            , -1), 1))"
+            distance_raw_sql = RawSQL(
+                gcd_formula,
+                (latitude, longitude, latitude)
+            )
+            qs = self.get_queryset()
+            #get biz in the viewable space
+            qs = qs.filter(lat__lt = nelat, lat__gt = swlat, lon__lt = nelon, lon__gt = swlon)
+            qs = qs.annotate(distance=distance_raw_sql)
+            qs = qs.order_by('distance')
+            # .values_list("placeID", flat=True)
+            # qs = qs[:10] # take only the first 10
+            listOfPlaceIDs = []
+            for place in qs.iterator():
+                # get wait time average
+                listOfPlaceIDs.append([place.placeID, place.getAverage()])
+            # data = serialize("json", [ qs, ])
+            print('qs: ' + str(listOfPlaceIDs))
+            return listOfPlaceIDs
+        return('bad inputs') #escape out
+
 # Create your models here.
 class restaurants(models.Model):
     time = models.TimeField(default=timezone.now)
@@ -30,6 +76,9 @@ class restaurants(models.Model):
 
     def __str__(self):
         return str(self.name)
+
+    objects = restaurants_Manager()
+
 
 
 class story(models.Model):

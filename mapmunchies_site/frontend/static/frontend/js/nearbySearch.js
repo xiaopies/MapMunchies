@@ -39,10 +39,7 @@ function nearbySearch(){
     swlat:sw.lat(),
     swlon:sw.lng(),
   }
-  let nelat = ne.lat();
-  let nelon = ne.lng();
-  let swlat = sw.lat();
-  let swlon = sw.lng();
+
   console.log("query from local db");
   queryDB(request, renderMarkers);
 }
@@ -58,10 +55,20 @@ function renderMarkers(data){
  * @param {function} callback
  */
 function queryDB(request, callback){
-  var xhr = new XMLHttpRequest();
-  xhr.open("POST", "/nearbySearch", true);
-  xhr.setRequestHeader('X_CSRFTOKEN', CONSTANTS.csrftoken);
-  xhr.setRequestHeader('Content-Type', 'application/json');
-  xhr.send(JSON.stringify(request));
-  console.log(xhr);
+  console.log(request);
+  $.ajax({
+    headers: { "X-CSRFToken": getCSRF() },
+    type: "POST",
+    url: "/nearbySearch",
+    data: JSON.stringify(request),
+    contentType: "application/json",
+    dataType: "json",
+    success: function (data) {
+      callback(data);
+    },
+    error: function (errMsg) {
+        console.log(errMsg);
+    }
+  });
+
 }

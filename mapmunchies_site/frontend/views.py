@@ -2,6 +2,7 @@ from django.http.response import HttpResponse
 from django.shortcuts import render
 from stories.forms import RestaurantForm, StoryForm
 from stories.models import restaurants
+import json
 # Create your views here.
 def index(request):
     if request.method == "POST" and request.user.is_authenticated:
@@ -16,10 +17,13 @@ def index(request):
     context = {'form': StoryForm()}
     return render(request, 'frontend/index.html', context)
 
+
 def nearbySearch(request):
     if request.method == "POST":
-        print(request);
-        return HttpResponse('{"status": "good"}')
+        json_data = request.read()
+        data = json.loads(json_data)
+        restaurants.objects.search(data)
+        return HttpResponse(json.dumps('{"status": "good"}'))
 
 def explore(request):
     if request.method == "POST" and request.user.is_authenticated:
