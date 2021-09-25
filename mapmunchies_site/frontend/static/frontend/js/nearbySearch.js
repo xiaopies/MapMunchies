@@ -60,7 +60,8 @@ function renderMarkers(data){
 function queryDB(request, callback){
   var xhr = new XMLHttpRequest();
   xhr.open("POST", "/nearbySearch", true);
+  xhr.setRequestHeader('X_CSRFTOKEN', CONSTANTS.csrftoken);
   xhr.setRequestHeader('Content-Type', 'application/json');
-  xhr.setRequestHeader('HTTP_X_CSRFTOKEN', CONSTANTS.csrftoken);
   xhr.send(JSON.stringify(request));
+  console.log(xhr);
 }
