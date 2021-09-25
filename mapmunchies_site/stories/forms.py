@@ -13,8 +13,8 @@ def figureOutChoices():
 class RestaurantForm(forms.Form):
     bourogh = forms.ChoiceField(label="What bourogh is your Restaurant in", choices=figureOutChoices())
     name = forms.CharField(label="Name of Restaurant", error_messages={'required': 'Please submit your Restaurant name'})
-    xcor = forms.FloatField()
-    ycor = forms.FloatField()
+    lat = forms.FloatField()
+    lon = forms.FloatField()
 
 class StoryForm(forms.ModelForm):
     class Meta:

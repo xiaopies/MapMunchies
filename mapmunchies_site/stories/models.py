@@ -26,8 +26,9 @@ class restaurants_Manager(models.Manager):
             return(False)
     # request = { latitude:float, longitude:float, nelat:float, nelon:float, swlat:float, swlon:float }
     def search(self, request):
+        print(request)
         x = True
-        for key, value in request:
+        for value in request.values():
             if not self.isFloatNum(value):
                 x = False
         # x = self.isFloatNum(request.latitude) and self.isFloatNum(request.longitude) 
@@ -41,11 +42,11 @@ class restaurants_Manager(models.Manager):
             , -1), 1))"
             distance_raw_sql = RawSQL(
                 gcd_formula,
-                (latitude, longitude, latitude)
+                (request["centerlat"], request["centerlng"], request["centerlat"])
             )
             qs = self.get_queryset()
             #get biz in the viewable space
-            qs = qs.filter(lat__lt = nelat, lat__gt = swlat, lon__lt = nelon, lon__gt = swlon)
+            qs = qs.filter(lat__lt = request["nelat"], lat__gt = request["swlat"], lon__lt = request["nelon"], lon__gt = request["swlon"])
             qs = qs.annotate(distance=distance_raw_sql)
             qs = qs.order_by('distance')
             # .values_list("placeID", flat=True)
@@ -64,9 +65,9 @@ class restaurants(models.Model):
     time = models.TimeField(default=timezone.now)
     name = models.CharField(max_length = 20, validators = [MinLengthValidator(1)])
     borough = models.IntegerField(validators=[MinValueValidator(0, message="must be a value from 1-5")])
-    xcor = models.FloatField()
-    ycor = models.FloatField()
-    REQUIRED_FIELDS = [time, name, borough,xcor, ycor]
+    lat = models.FloatField()
+    lon = models.FloatField()
+    REQUIRED_FIELDS = [time, name, borough,lat, lon]
 
     # has to be a nyc bourogh for now
     # futore could use coords with google geolocator api
