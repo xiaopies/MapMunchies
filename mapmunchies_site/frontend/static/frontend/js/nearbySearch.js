@@ -45,8 +45,28 @@ function nearbySearch(){
 }
 
 function renderMarkers(data){
-  data = JSON.parse(data)
+  // data = JSON.parse(data)
+  data = data.data
   console.log(data);
+  for (i in data){
+    let markerlocation = {"lat": data[i][1], "lng":data[i][2]}
+    let marker = new google.maps.Marker({
+      position: markerlocation,
+      map : GLOBALS.map,
+
+    });
+    google.maps.event.addListener(marker, "click", () => {
+      const name = data[i][0];
+      const location = markerlocation ;
+      GLOBALS.infoWindow.close();
+      GLOBALS.infoWindow = new google.maps.InfoWindow({
+        position: location,
+        content: wrapInfoWindowText(name),
+      });
+      GLOBALS.infoWindow.open(GLOBALS.map);
+    });
+
+  }
 }
 
 /**

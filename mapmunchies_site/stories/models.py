@@ -34,7 +34,7 @@ class restaurants_Manager(models.Manager):
         # x = self.isFloatNum(request.latitude) and self.isFloatNum(request.longitude) 
         # x = x and self.isFloatNum(request.nelat) and self.isFloatNum(request.nelon) and self.isFloatNum(request.swlat) and self.isFloatNum(swlon)
         if (x): 
-            # Great circle distance formula
+            # Great circle distance formula => Returning value in kms
             gcd_formula = "6371 * acos(min(max(\
             cos(radians(%s)) * cos(radians(lat)) \
             * cos(radians(lon) - radians(%s)) + \
@@ -54,7 +54,8 @@ class restaurants_Manager(models.Manager):
             listOfPlaceIDs = []
             for place in qs.iterator():
                 # get wait time average
-                listOfPlaceIDs.append([place.placeID, place.getAverage()])
+                # listOfPlaceIDs.append([place, place.distance]) # testing
+                listOfPlaceIDs.append([place.name, place.lat, place.lon])
             # data = serialize("json", [ qs, ])
             print('qs: ' + str(listOfPlaceIDs))
             return listOfPlaceIDs

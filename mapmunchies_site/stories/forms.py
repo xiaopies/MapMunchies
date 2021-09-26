@@ -1,5 +1,5 @@
 from django import forms
-from .models import get_borough_list, story
+from .models import get_borough_list, story, restaurants
 class StoryForm(forms.Form):
     pass
 
@@ -10,11 +10,13 @@ def figureOutChoices():
     CHOICES = tuple((index, bourogh) for index, bourogh in list_of_bouroghs.items())
     return CHOICES
 
-class RestaurantForm(forms.Form):
+class RestaurantForm(forms.ModelForm):
     bourogh = forms.ChoiceField(label="What bourogh is your Restaurant in", choices=figureOutChoices())
-    name = forms.CharField(label="Name of Restaurant", error_messages={'required': 'Please submit your Restaurant name'})
-    lat = forms.FloatField()
-    lon = forms.FloatField()
+
+    class Meta:
+        model = restaurants
+        fields = ['name', 'lat', 'lon']
+
 
 class StoryForm(forms.ModelForm):
     class Meta:

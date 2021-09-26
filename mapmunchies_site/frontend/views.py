@@ -1,5 +1,5 @@
 from django.http.response import HttpResponse
-from django.shortcuts import render
+from django.shortcuts import render, redirect, reverse
 from stories.forms import RestaurantForm, StoryForm
 from stories.models import restaurants
 import json
@@ -12,6 +12,7 @@ def index(request):
             ParticalStory = form.save(commit=False)
             ParticalStory.author = request.user
             ParticalStory.save()
+            return redirect(reverse('index')) # We redirect to the same view
         else:
             return HttpResponse(form.errors)
     context = {'form': StoryForm()}
@@ -22,27 +23,32 @@ def nearbySearch(request):
     if request.method == "POST":
         json_data = request.read()
         data = json.loads(json_data)
-        restaurants.objects.search(data)
-        return HttpResponse(json.dumps('{"status": "good"}'))
+        result = restaurants.objects.search(data)
+        print(type(result))
+        if type(result) is list:
+            formatedresult = {
+                'data': result,
+            }
+            # good
+            return HttpResponse(json.dumps(formatedresult))
+        else:
+            return HttpResponse(json.dumps('{"status": "1", "Error":'+ result +'}'))
+        
 
 def explore(request):
     if request.method == "POST" and request.user.is_authenticated:
         #user submitted new restaurants form
         form = RestaurantForm(request.POST)
         if form.is_valid():
-            print(form.cleaned_data['name'])
-            newRestaurant = restaurants(
-                name = form.cleaned_data['name'],
-                borough = form.cleaned_data['bourogh'],
-                xcor = form.cleaned_data['xcor'],
-                ycor = form.cleaned_data['ycor'],
-                )
+            newRestaurant = form.save(commit=False)
+            print("blah: " +  str(form.cleaned_data['bourogh']))
+            newRestaurant.borough = form.cleaned_data['bourogh']
             newRestaurant.save()
+            return redirect(reverse('frontend:explore')) # We redirect to the same view
         else:
             return HttpResponse(form.errors)
 
-    restaurantform = RestaurantForm()
-    context = {'RestaurantForm':restaurantform}
+    context = {'RestaurantForm':RestaurantForm()}
     return render(request, 'frontend/explore.html', context)
 
 def about(request):
